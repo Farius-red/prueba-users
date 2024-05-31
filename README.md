@@ -52,6 +52,8 @@ Este se encarga de interactuar con la base de datos
 **paso 10**  ejecutar  la ruta que copiamos sin la parte final del .jar
 cd  /home/daniel-juliao-sistem/Documentos/desarrollo/backend/mcs-financial/target/
 
+es un ejemplo para poder correrlo localmente las carpetas tienen q ser en la ubicacion en la que se descarga y cambiando las rutas 
+
 
 
 
