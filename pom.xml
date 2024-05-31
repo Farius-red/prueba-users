@@ -146,6 +146,7 @@
                         <exclude>com/juliaosystem/api/dtos/**</exclude>
                         <exclude>com/juliaosystem/api/mappers/**</exclude>
                         <exclude>com/juliaosystem/utils/**</exclude>
+                        <exclude>com/juliaosystem/infrastructure/services/**</exclude>
                         <exclude>com/juliaosystem/infrastructure/entitis/**</exclude>
                     </excludes>
                 </configuration>
