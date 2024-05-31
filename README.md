@@ -8,12 +8,12 @@ postgres
 
 imagen prueba de covertura
 
-![Texto alternativo](https://github.com/Farius-red/mcs-financial/blob/master/imgDocumentacion/jacoco.png)
+![Texto alternativo](https://github.com/Farius-red/prueba-users/blob/master/imgDocumentacion/jacoco.png)
 
 # Arquitectura  Hexagonal
 
 
-![Texto alternativo](https://github.com/Farius-red/mcs-financial/blob/master/imgDocumentacion/arquitectura.png)
+![Texto alternativo](https://github.com/Farius-red/prueba-users/blob/master/imgDocumentacion/arquitectura.png)
 
 En el paquete de infraestructura  esta la logica del negocio separada por dos paquetes
 
