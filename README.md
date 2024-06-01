@@ -6,7 +6,7 @@ postgres
 
 # Prueba de cobertura
 
-imagen prueba de covertura
+imagen prueba de covertura de text unitarios junit y mockito 
 
 ![Texto alternativo](https://github.com/Farius-red/prueba-users/blob/master/imgDocumentacion/jacoco.png)
 
