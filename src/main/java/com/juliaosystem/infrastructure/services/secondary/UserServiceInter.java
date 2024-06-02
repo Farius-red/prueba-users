@@ -20,4 +20,6 @@ public interface UserServiceInter {
     PlantillaResponse<RegisterUserDTO> getUsers(long idBussines);
 
  PlantillaResponse<RegisterUserDTO> getUserById(UUID id);
+
+  PlantillaResponse<RegisterUserDTO> all ();
 }

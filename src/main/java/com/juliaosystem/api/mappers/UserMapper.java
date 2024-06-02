@@ -33,7 +33,7 @@ public class UserMapper implements PlantillaMapers<User, RegisterUserDTO> {
                 .idBussines(user.getIdBussines())
                 .id(user.getId_usuario())
                 .email(user.getEmail())
-                .estado((user.getDatesUser()!= null)?user.getDatesUser().getState().getNameState(): "INACTIVE")
+                .estado((user.getDatesUser()!= null && user.getDatesUser().getState() != null)?user.getDatesUser().getState().getNameState(): "INACTIVE")
                 .datesUser(DatesUserDTO.builder()
                         .secondName((user.getDatesUser() != null )?user.getDatesUser().getSecondName(): "")
                         .firstName((user.getDatesUser()!= null)?user.getDatesUser().getFirstName():"")

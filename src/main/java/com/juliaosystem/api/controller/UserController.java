@@ -15,6 +15,7 @@ import java.util.UUID;
 @RequestMapping("/user")
 @Tag(name = "usuarios", description = "Endpoints relacionados con el manejo de usuarios")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
@@ -24,7 +25,7 @@ public class UserController {
     @Operation(summary = "add", description = "Permite agregar un usuario")
     @PostMapping("/add")
     public ResponseEntity<PlantillaResponse<RegisterUserDTO>> add(
-            @RequestBody(required = true) RegisterUserDTO entidad) {
+            @RequestBody RegisterUserDTO entidad) {
         var response = userService.addUser(entidad);
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
@@ -33,7 +34,7 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<PlantillaResponse<RegisterUserDTO>> all(
             @RequestParam(value = "id", required = false) UUID id,
-            @RequestHeader("idBussines") Long idBussines) {
+            @RequestHeader(value = "idBussines" , required = false) Long idBussines) {
         var response = userService.getUsers(id, idBussines);
         return new ResponseEntity<>(response, response.getHttpStatus());
     }

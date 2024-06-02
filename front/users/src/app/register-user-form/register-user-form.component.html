@@ -1,0 +1,22 @@
+<mat-grid-list cols="1" rowHeight="4:2">
+
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" required>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" required>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone" required>
+    </mat-form-field>
+    <button mat-button type="submit" [disabled]=registerForm.invalid >Register</button>
+  </form>
+  
+</mat-grid-list>

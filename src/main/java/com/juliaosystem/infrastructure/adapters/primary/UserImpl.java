@@ -40,8 +40,12 @@ public class UserImpl {
     }
 
 
-    public PlantillaResponse<RegisterUserDTO> getUsers(UUID id, long idBussines) {
-        if(id  == null) {
+    public PlantillaResponse<RegisterUserDTO> getUsers(UUID id, Long idBussines) {
+
+     if(id  == null) {
+         if(idBussines == null)
+             return userServiceInter.all();
+         else
             return userServiceInter.getUsers(idBussines);
         }else
             return userServiceInter.getUserById(id);

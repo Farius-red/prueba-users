@@ -22,7 +22,7 @@ public class UserService {
        return userImpl.add(registerUserDTO);
     }
 
-    public PlantillaResponse<RegisterUserDTO> getUsers( UUID id, long idBussines) {
+    public PlantillaResponse<RegisterUserDTO> getUsers( UUID id, Long idBussines) {
         return userImpl.getUsers(id,idBussines);
     }
 }

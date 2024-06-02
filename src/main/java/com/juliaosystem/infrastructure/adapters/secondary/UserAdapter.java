@@ -109,7 +109,9 @@ public class UserAdapter   implements UserServiceInter {
             registerUserDTO.setId(userSave.getId_usuario());
             registerUserDTO.getDatesUser().setIdDatesUser(UUID.randomUUID());
             registerUserDTO.getDatesUser().setIdUrl(DatesUserMapper.generarCadenaAleatoria());
-
+            if(registerUserDTO.getDatesUser().getEstado() == null){
+                registerUserDTO.setEstado("3fa85f64-5717-4562-b3fc-2c963f66afa6");
+            }
             datesUserRepository.saveDatesUser(registerUserDTO);
             abtractError.logInfo("llenarEntidades().SaveDatesUser():" + MensajesRespuesta.CREADO +" los datos de usuario  " +  OBJECT_MAPPER.writeValueAsString(registerUserDTO.getDatesUser()));
             fillPhone(registerUserDTO);
@@ -153,6 +155,24 @@ public class UserAdapter   implements UserServiceInter {
             }else {
                 var listRegisterDTO = userMapper.getListDTO(listUsers.stream().toList());
                 abtractError.logInfo("getUserById.getUsers():" + MensajesRespuesta.GET +" de usuario  " +     OBJECT_MAPPER.writeValueAsString(listUsers));
+                return userResponses.buildResponse(ResponseType.GET.getCode(), RegisterUserDTO.builder().build(),listRegisterDTO);
+            }
+        }catch (Exception e){
+            abtractError.logError(e);
+            return   userResponses.buildResponse(ResponseType.FALLO.getCode(), RegisterUserDTO.builder().build());
+        }
+    }
+
+    @Override
+    public PlantillaResponse<RegisterUserDTO> all() {
+        try {
+            var listUsers = userRepository.findAll();
+            if(listUsers.isEmpty()){
+                abtractError.logInfo("userAdapter.all():" + MensajesRespuesta.NO_ENCONTRADO +"de usuarios" +  OBJECT_MAPPER.writeValueAsString(listUsers));
+                return userResponses.buildResponse(ResponseType.NO_ENCONTRADO.getCode(), RegisterUserDTO.builder().build());
+            }else {
+                var listRegisterDTO = userMapper.getListDTO(listUsers.stream().toList());
+                abtractError.logInfo("userAdapter.all():" + MensajesRespuesta.GET +" de usuario" );
                 return userResponses.buildResponse(ResponseType.GET.getCode(), RegisterUserDTO.builder().build(),listRegisterDTO);
             }
         }catch (Exception e){
