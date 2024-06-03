@@ -6,6 +6,7 @@ import com.juliaosystem.infrastructure.services.secondary.UserServiceInter;
 import com.juliaosystem.utils.PlantillaResponse;
 import com.juliaosystem.utils.UserResponses;
 
+import com.juliaosystem.utils.enums.MensajesRespuesta;
 import com.juliaosystem.utils.enums.ResponseType;
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +24,7 @@ public class UserImpl {
 
 
     private final UserResponses<RegisterUserDTO> userResponses;
+    private final UserResponses<byte[]> userResponsesExcel;
 
 
 
@@ -49,5 +51,14 @@ public class UserImpl {
             return userServiceInter.getUsers(idBussines);
         }else
             return userServiceInter.getUserById(id);
+    }
+
+    public PlantillaResponse<byte[]> reportExcel() {
+        var user = userServiceInter.all();
+        if(user.getMessage().equalsIgnoreCase(ResponseType.GET.getMessage())){
+            return userServiceInter.reportExcel(user);
+        }else {
+            return userResponsesExcel.buildResponse(ResponseType.fromMessage(user.getMessage()).getCode(), null);
+        }
     }
 }

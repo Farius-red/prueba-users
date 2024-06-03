@@ -6,6 +6,8 @@ import com.juliaosystem.utils.PlantillaResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,4 +40,14 @@ public class UserController {
         var response = userService.getUsers(id, idBussines);
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
+
+    @GetMapping("/export/excel")
+    public ResponseEntity<PlantillaResponse<byte[]>> exportToExcel()  {
+        var response = userService.reportExcel();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(response ,headers,response.getHttpStatus());
+    }
+
+
 }

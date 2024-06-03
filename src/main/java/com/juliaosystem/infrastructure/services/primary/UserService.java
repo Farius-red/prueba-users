@@ -25,4 +25,8 @@ public class UserService {
     public PlantillaResponse<RegisterUserDTO> getUsers( UUID id, Long idBussines) {
         return userImpl.getUsers(id,idBussines);
     }
+
+    public PlantillaResponse<byte[]> reportExcel() {
+       return userImpl.reportExcel();
+    }
 }

@@ -22,4 +22,6 @@ public interface UserServiceInter {
  PlantillaResponse<RegisterUserDTO> getUserById(UUID id);
 
   PlantillaResponse<RegisterUserDTO> all ();
+
+ PlantillaResponse<byte[]> reportExcel(PlantillaResponse<RegisterUserDTO> user);
 }

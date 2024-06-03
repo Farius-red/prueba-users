@@ -6,6 +6,8 @@ table {
 .table-container {
   max-height: 400px;
   overflow-y: auto;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 .contenedor-filtros {
@@ -15,6 +17,33 @@ table {
 }
 
 @media screen and (max-width: 600px) {
+
+  .example-container {
+    height: auto;
+    width: 350px;
+    max-width: 100%;
+    overflow: auto;
+  }
+  .contenedor-filtros[_ngcontent-ng-c102568857]   mat-form-field[_ngcontent-ng-c102568857], .contenedor-filtros[_ngcontent-ng-c102568857]   button[_ngcontent-ng-c102568857] {
+    width: 50%;
+  }
+
+td.mat-column-star {
+  width: 20px;
+  padding-right: 8px;
+}
+
+th.mat-column-position, td.mat-column-position {
+  padding-left: 8px;
+}
+
+.mat-mdc-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
+}
+
+.mat-mdc-table-sticky-border-elem-left {
+  border-right: 1px solid #e0e0e0;
+}
   .contenedor-filtros {
     flex-direction: column;
     align-items: stretch;
@@ -34,4 +63,3 @@ table {
 .contenedor-filtros button {
   margin-bottom: 1rem; 
 }
-

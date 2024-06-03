@@ -10,26 +10,29 @@
 
     
       <ng-container>
-        <mat-form-field>
+        <mat-form-field class="filters">
           <mat-label>Filtro por Shared</mat-label>
           <input matInput #filterInput (keyup)="applyFilter(filterInput.value)" placeholder="Escribe el Shared">
         </mat-form-field>
       </ng-container>
       
       <ng-container>
-        <mat-form-field>
+        <mat-form-field class="filters">
           <mat-label>Filtro por idBussines</mat-label>
-          <input matInput  #filteridBussines (keyup)="applyFilterByidBussines(filteridBussines.value)" placeholder="Escribe el Shared">
+          <input matInput  #filteridBussines (keyup)="applyFilterByidBussines(filteridBussines.value)" placeholder="Escribe un id">
         </mat-form-field>
       </ng-container>
 
-      <button mat-flat-button color="primary" (click)="openRegisterForm()">+</button>
+      <button mat-flat-button color="primary" (click)="openRegisterForm()">+ <mat-icon>perm_identity</mat-icon></button>
+      <button mat-flat-button color="primary" (click)="downloadExcel()"><mat-icon>get_app</mat-icon></button>
+      
     </div>
+    <section class="example-container mat-elevation-z8" tabindex="0">
     <table mat-table [dataSource]="dataSource">
 
     
       <!-- Position Column -->
-      <ng-container matColumnDef="Shared">
+      <ng-container matColumnDef="Shared" sticky>
         <th mat-header-cell *matHeaderCellDef> Shared </th>
         <td mat-cell *matCellDef="let element"> {{ element.email.slice(0, 5) }} </td>
       </ng-container>
@@ -54,15 +57,18 @@
       </ng-container>
   
       <!-- phone Column -->
-      <ng-container matColumnDef="phone">
+      <ng-container matColumnDef="phone" stickyEnd>
         <th mat-header-cell *matHeaderCellDef>Phone </th>
         <td mat-cell *matCellDef="let element"> {{element.datesUser.phone[0].number}}</td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-  </div></mat-grid-tile>
+  </section>
+</div>
+  
+</mat-grid-tile>
 </mat-grid-list>
 
 

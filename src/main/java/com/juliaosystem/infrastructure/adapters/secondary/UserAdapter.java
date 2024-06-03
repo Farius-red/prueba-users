@@ -23,6 +23,11 @@ import com.juliaosystem.utils.UserResponses;
 
 import com.juliaosystem.utils.enums.*;
 import lombok.RequiredArgsConstructor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +35,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayOutputStream;
 import java.util.*;
 
 @Service
@@ -41,6 +47,7 @@ public class UserAdapter   implements UserServiceInter {
             new ObjectMapper().registerModule(new JavaTimeModule());
     private final UserResponses<RegisterUserDTO> userResponses;
     private final  UserResponses<User> userUserResponsesUser;
+    private final UserResponses<byte[]> userResponsesByte;
 
 
     private final AbtractError abtractError;
@@ -178,6 +185,41 @@ public class UserAdapter   implements UserServiceInter {
         }catch (Exception e){
             abtractError.logError(e);
             return   userResponses.buildResponse(ResponseType.FALLO.getCode(), RegisterUserDTO.builder().build());
+        }
+    }
+
+    @Override
+    public PlantillaResponse<byte[]> reportExcel(PlantillaResponse<RegisterUserDTO> data) {
+        try {
+            Workbook workbook = new XSSFWorkbook();
+            Sheet sheet = workbook.createSheet("Users");
+            int rowNum = 0;
+
+
+            Row headerRow = sheet.createRow(rowNum++);
+            String[] headers = {"IdBusiness", "Name", "ID", "Email", "Phone"};
+            for (int i = 0; i < headers.length; i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(headers[i]);
+            }
+
+            for (RegisterUserDTO user : data.getDataList()) {
+                Row row = sheet.createRow(rowNum++);
+                row.createCell(0).setCellValue(user.getIdBussines());
+                row.createCell(1).setCellValue(user.getDatesUser().getFirstName());
+                row.createCell(2).setCellValue(user.getId().toString());
+                row.createCell(3).setCellValue(user.getEmail());
+                row.createCell(4).setCellValue(user.getDatesUser().getPhone().getFirst().getNumber());
+            }
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            workbook.write(outputStream);
+            workbook.close();
+         return    userResponsesByte.buildResponse(ResponseType.CREATED.getCode(),outputStream.toByteArray());
+        }catch (Exception e){
+            abtractError.logError(e);
+            return   userResponsesByte.buildResponse(ResponseType.FALLO.getCode(), null);
+
         }
     }
 
